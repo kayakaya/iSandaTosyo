@@ -1,0 +1,25 @@
+<ul class="pageitem">
+  <li class="textbox">
+    <div>
+      <p><span style="font-size: 120%""><%= @title %></span><br />
+          <%= @author %><br />
+          <%= @publisher %> <%= @year %>発行 <%= @pages %> サイズ <%= @size %><br />
+          ISBN: <%= @isbn  %><br />
+          <%= @description %><br />
+          <%= @author_info %></p>
+    </div>
+  </li>
+</ul>
+<% if @reserve_count > 0 %>
+<ui class="pageitem">
+<li class="textbox">予約 <%= @reserve_count.to_s %> 人</li>
+<% end %>
+</ui>
+<ul class="pageitem">
+  <% @stocks.each do |stock| %>
+  <li class="textbox"><%= stock[:library] %>, <%= stock[:location] %>, <%= stock[:code] %>, <%= stock[:lending] %><%= stock[:kintai] %></li>
+  <% end %>
+</ul>
+<ul class="pageitem">
+  <li class="form"><input name="link" type="button" value="図書館のページを開く" onclick="window.location = '<%= @url %>'; return false;"/></li>
+</ul>

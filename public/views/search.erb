@@ -1,0 +1,27 @@
+<span class="graytitle"><%= @title %></span>
+<form action="/<%= @search_type %>" method="get" >
+  <ul class="pageitem">
+    <li class="form"><input name="word" placeholder="必須" type="text" value="<%= params[:word].force_encoding('UTF-8') %>"/></li>
+    <li class="form"><input name="search" type="submit" value="検索" /></li>
+  </ul>
+</form>
+<span class="graytitle">"<%= @word.force_encoding('UTF-8') %>"を検索</span>
+<ul class="pageitem">
+  <% if @books.length == 0 %>
+  <li>見つかりませんでした</li>
+  <% end %>
+  <% @books.each do |book| %>
+  <li class="store">
+    <a class="noeffect" href="<%= @base_url %>/book/<%= book[:id] %>">
+      <span class="image" style="background-image: url('book.png')"></span>
+      <span class="name" style="overflow:visible;font-size:10pt;"><%=book[:title] %></span>
+      <span class="comment"><%= book[:author] %> <br /><%= book[:publisher] %></span>
+      <span class="starcomment" style="position: relative;top:0;left:0;margin-left:95px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;width: 60%;">分類:<%= book[:ndc] %>/ 本館:<%= book[:stock_honkan] %> 藍:<%= book[:stock_ai] %> ウッディ:<%= book[:stock_woody] %> <span>
+          <span class="arrow"></span>
+    </a>
+  </li>
+  <% end %>
+  <% if !@next.text.empty? %>
+  <li id="next" class="form"><input name="search" type="submit" value="次の20件を読み込む" onclick="loadNext('search/<%= params[:word] %>', <%= @next.text.gsub(/.*(\d)$/,'\\1').to_i %>); return false;" /></li>
+  <% end %>
+</ul>

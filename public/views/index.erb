@@ -1,0 +1,19 @@
+<span class="graytitle">書名</span>
+<form action="<%= @base_url %>/title" method="get" >
+<ul class="pageitem">
+  <li class="form"><input name="word" placeholder="必須" type="text" value="" /></li>
+  <li class="form"><input name="search" type="submit" value="検索" /></li>
+</ul>
+</form>
+<span class="graytitle">著者名</span>
+<form action="<%= @base_url %>/author" method="get" >
+<ul class="pageitem">
+  <li class="form"><input name="word" placeholder="必須" type="text" value="" /></li>
+  <li class="form"><input name="search" type="submit" value="検索" /></li>
+</ul>
+</form>
+
+<ul class="pageitem">
+  <li class="form"><input name="link" type="button" value="公式サイトを開く" onclick="window.location='http://libweb.area-sanda-hyogo.jp/toshow/index.html'; return false;"/></li>
+</ul>
+</ul>

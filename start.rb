@@ -32,23 +32,6 @@ configure :development do
   use Sinatra::Reloader
 end
 
-# ここを参考に
-# http://blog.livedoor.jp/faulist/archives/1219486.html
-module Rack
-  module Utils
-    def escape_html(s)
-      s.to_s.gsub(/([^ a-zA-Z0-9_.-]+)/) {
-        '%'+$1.unpack('H2'*bytesize($1)).join('%').upcase
-      }.tr(' ', '+')
-    end
-  end
-end
-
-helpers do
-  include Rack::Utils
-  alias_method :h, :escape_html
-end
-
 def search(search_type, word, page)
 
   word_sjis = NKF::nkf("-Ws", word)
@@ -149,20 +132,20 @@ get '/?' do
   erb :index
 end
 
-get '/title?' do
+get '/title/?' do
   redirect "#{options.base_url}/title/#{URI.escape(params[:word])}" if params[:word]
-  redirect '#{options.base_url}/'
+  redirect "#{options.base_url}/"
 end
-get '/author?' do
+get '/author/?' do
   redirect "#{options.base_url}/author/#{URI.escape(params[:word])}" if params[:word]
-  redirect '#{options.base_url}/'
+  redirect "#{options.base_url}/"
 end
 
 get '/title/:word' do
 
-  @word = params['word']
+  @word = params[:word]
 
-  redirect '/' if !@word or @word.empty?
+  redirect "#{options.base_url}/" if !@word or @word.empty?
   @page = params[:page] || '1'
   @search_type = 'title'
 
@@ -175,7 +158,7 @@ get '/author/:word' do
 
   @word = params[:word]
 
-  redirect '/' if !@word or @word.empty?
+  redirect "{options.base_url}/" if !@word or @word.empty?
   @page = params[:page] || '1'
   @search_type = 'author'
 
@@ -184,7 +167,7 @@ get '/author/:word' do
 
 end
 
-get '/title/word/page' do
+get '/title/:word/:page' do
 
   @word = params[:word]
   @page = params[:page] || '1'
@@ -193,7 +176,7 @@ get '/title/word/page' do
 
 end
 
-get '/author/:word/page' do
+get '/author/:word/:page' do
 
   @word = params[:word]
   @page = params[:page] || '1'

@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # -*- encoding: utf-8 -*-
 
+require 'rubygems'
 require 'sinatra'
 require 'rack'
 require 'uri'
@@ -8,10 +9,6 @@ require 'erb'
 require 'open-uri'
 require 'nokogiri'
 require 'nkf'
-
-configure do
-  Encoding.default_external = 'UTF-8'
-end
 
 configure :development do
 
@@ -30,6 +27,10 @@ configure :development do
     end
   end
   use Sinatra::Reloader
+end
+
+configure do
+  set :default_external, 'UTF-8'
 end
 
 def search(search_type, word, page)
@@ -80,14 +81,14 @@ def rows_info_of_books(detail)
 
   index = {
     :title => 3,
-    :author => 6,
-    :publisher => 8,
-    :year => 9,
-    :ndc => 10,
-    :pages => 11,
-    :size => 12,
-    :isbn => 13,
-    :description => 14
+    :author => 5,
+    :publisher => 7,
+    :year => 8,
+    :ndc => 9,
+    :pages => 10,
+    :size => 11,
+    :isbn => 12,
+    :description => 13
   }
 
   index_has_second_author = {
@@ -103,6 +104,17 @@ def rows_info_of_books(detail)
   }
   index_is_series = {
     :title => 3,
+    :author => 6,
+    :publisher => 8,
+    :year => 9,
+    :ndc => 10,
+    :pages => 11,
+    :size => 12,
+    :isbn => 13,
+    :description => 14
+  }
+  index_is_library = {
+    :title => 3,
     :author => 8,
     :publisher => 10,
     :year => 11,
@@ -113,13 +125,16 @@ def rows_info_of_books(detail)
     :description => 16
   }
 
-  # 著者名2、叢書名がある場合は行が増えるので、取得する行を変更しておく
+  # 著者名2、巻次、叢書名がある場合は行が増えるので、取得する行を変更しておく
   is_second_author = detail.xpath('./tr/td[1][contains(.,"著者名２")]')
-  is_series = detail.xpath('./tr/td[1][contains(.,"叢書名")]')
+  is_series = detail.xpath('./tr/td[1][contains(.,"巻次")]')
+  is_library = detail.xpath('./tr/td[1][contains(.,"叢書名")]')
   if !is_second_author.empty? then
     index = index_has_second_author
   elsif !is_series.empty? then
     index = index_is_series
+  elsif !is_library.empty? then
+    index = index_is_library
   end
   return index
 
@@ -196,6 +211,7 @@ get '/book/:id' do
   # 書誌情報
   detail = doc.xpath('/html/body/table/tr/td/form/table[1]')
 
+  # 行の情報を取得する
   index = rows_info_of_books(detail)
 
   @title = detail.css("tr[#{index[:title]}] td[2]").text

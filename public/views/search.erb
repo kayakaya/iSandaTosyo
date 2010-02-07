@@ -1,5 +1,5 @@
 <span class="graytitle"><%= @title %></span>
-<form action="/<%= @search_type %>" method="get" >
+<form action="<%= @base_url %>/<%= @search_type %>" method="get" >
   <ul class="pageitem">
     <li class="form"><input name="word" placeholder="必須" type="text" value="<%= params[:word] %>"/></li>
     <li class="form"><input name="search" type="submit" value="検索" /></li>

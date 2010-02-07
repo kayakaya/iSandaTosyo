@@ -21,7 +21,4 @@
     </a>
   </li>
   <% end %>
-  <% if !@next.text.empty? %>
-  <li id="next" class="form"><input name="search" type="submit" value="次の20件を読み込む" onclick="loadNext('search/<%= params[:word] %>', <%= @next.text.gsub(/.*(\d)$/,'\\1').to_i %>); return false;" /></li>
-  <% end %>
 </ul>

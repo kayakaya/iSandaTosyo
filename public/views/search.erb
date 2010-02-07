@@ -1,11 +1,11 @@
 <span class="graytitle"><%= @title %></span>
 <form action="/<%= @search_type %>" method="get" >
   <ul class="pageitem">
-    <li class="form"><input name="word" placeholder="必須" type="text" value="<%= params[:word].force_encoding('UTF-8') %>"/></li>
+    <li class="form"><input name="word" placeholder="必須" type="text" value="<%= params[:word] %>"/></li>
     <li class="form"><input name="search" type="submit" value="検索" /></li>
   </ul>
 </form>
-<span class="graytitle">"<%= @word.force_encoding('UTF-8') %>"を検索</span>
+<span class="graytitle">"<%= @word %>"を検索</span>
 <ul class="pageitem">
   <% if @books.length == 0 %>
   <li>見つかりませんでした</li>

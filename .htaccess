@@ -1,5 +1,9 @@
 DirectoryIndex dispatch.cgi
 
+<Files ".*">
+       deny from all
+</Files>
+
 <Files "*.rb">
         deny from all
 </Files>

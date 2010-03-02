@@ -1,14 +1,7 @@
 <ul class="pageitem">
-  <li class="textbox">
-    <div>
-      <p><span style="font-size: 120%""><%= @title %></span><br />
-          <%= @author %><br />
-          <%= @publisher %> <%= @year %>発行 <%= @pages %> サイズ <%= @size %><br />
-          ISBN: <%= @isbn  %><br />
-          <%= @description %><br />
-          <%= @author_info %></p>
-    </div>
-  </li>
+  <% @book_info.each do |info| %>
+  <li class="textbox"><%= info %></li>
+  <% end %>
 </ul>
 <% if @reserve_count > 0 %>
 <ui class="pageitem">

@@ -27,6 +27,7 @@ configure :development do
     end
   end
   use Sinatra::Reloader
+
 end
 
 configure do
@@ -94,7 +95,7 @@ def rows_info_of_books(detail)
   index_has_second_author = {
     :title => 3,
     :author => 6,
-    :publisher => 9,
+    :publisher => 10,
     :year => 11,
     :ndc => 12,
     :pages => 13,
@@ -209,20 +210,14 @@ get '/book/:id' do
   doc = Nokogiri::HTML(str, nil, 'cp932')
 
   # 書誌情報
-  detail = doc.xpath('/html/body/table/tr/td/form/table[1]')
+  detail = doc.xpath('/html/body/table/tr/td/form/table[1]/tr')
 
-  # 行の情報を取得する
-  index = rows_info_of_books(detail)
+  @title = detail.css("tr[3] td[2]").text
 
-  @title = detail.css("tr[#{index[:title]}] td[2]").text
-  @author = detail.css("tr[#{index[:author]}] td[2]").text
-  @publisher = detail.css("tr[#{index[:publisher]}] td[2]").text
-  @year = detail.css("tr[#{index[:year]}] td[2]").text
-  @ndc = detail.css("tr[#{index[:ndc]}] td[2]").text
-  @pages = detail.css("tr[#{index[:pages]}] td[2]").text
-  @size = detail.css("tr[#{index[:size]}] td[2]").text
-  @isbn = detail.css("tr[#{index[:isbn]}] td[2]").text
-  @description = detail.css("tr[#{index[:description]}] td[2]").text
+  @book_info = Array.new
+  detail.each do |tr|
+    @book_info << NKF.nkf('-wZ', tr.css("td").text)
+  end
 
   @reserve_count = detail.xpath('//html/body/table/tr/td/form/table[2]/tr/td').text.gsub(/.*(\d).*/, "\\1").to_i
   @stocks = Array.new

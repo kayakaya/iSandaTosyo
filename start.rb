@@ -2,8 +2,9 @@
 # -*- encoding: utf-8 -*-
 
 require 'rubygems'
-require 'sinatra'
 require 'rack'
+gem "sinatra", "=0.9.6"
+require 'sinatra'
 require 'uri'
 require 'erb'
 require 'open-uri'
@@ -28,10 +29,6 @@ configure :development do
   end
   use Sinatra::Reloader
 
-end
-
-configure do
-  set :default_external, 'UTF-8'
 end
 
 def search(search_type, word, page)

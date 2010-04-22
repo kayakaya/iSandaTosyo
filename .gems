@@ -1,2 +1,2 @@
-sinatra --version 0.9.6
+sinatra
 nokogiri

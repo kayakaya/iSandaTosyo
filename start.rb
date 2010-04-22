@@ -3,7 +3,6 @@
 
 require 'rubygems'
 require 'rack'
-gem "sinatra", "=0.9.6"
 require 'sinatra'
 require 'uri'
 require 'erb'

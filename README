@@ -1,4 +1,10 @@
-iSandaTosyo は三田市立図書館の蔵書をiPhoneから検索できるプログラムです。
+iSandaTosyo は三田市立図書館の蔵書をiPhoneから検索できるプログラムです。三田市が運営する図書館蔵書システムをスクレイピングし、iPhone向けに整形して表示します。
+
+- WebアプリケーションフレームワークにはSinatraを
+- スクレイピングにはnokogiriを
+- iPhone Web UIにはiWebKitを
+
+用いています。
 
 なお、iSandaTosyo は個人の手によるもので三田市立図書館および関係組織とは一切関係ありません。
 

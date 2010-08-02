@@ -37,7 +37,7 @@ def search(search_type, word, page)
   key1 = search_type == 'title' ? URI.encode(word_sjis) : ''
   key2 = search_type == 'author' ? URI.encode(word_sjis) : ''
 
-  url = "http://libweb.area-sanda-hyogo.jp/toshow/asp/Book_Kensaku_w.asp?hidKensakuF=1&Page=#{page}&taiz=1&sel1=1&key1=#{key1}&sel2=2&key2=#{key2}&sel3=3&key3=&sel4=4&key4=&andor=0&SortKubun=1&isbn=&book1=1&year-from=&year-to="
+  url = "http://libweb.area-sanda-hyogo.jp/toshow/asp/Book_Kensaku_w.asp?hidKensakuF=1&Page=#{page}&taiz=1&sel1=1&key1=#{key1}&sel2=2&key2=#{key2}&sel3=3&key3=&sel4=4&key4=&andor=0&SortKubun=1&isbn=&bookz=1&year-from=&year-to="
 
   str = open(url).read
   doc = Nokogiri::HTML(str, nil, 'cp932')

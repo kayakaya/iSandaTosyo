@@ -1,4 +1,4 @@
-#!/home/kayakayaichthys/local/ruby191/bin/ruby1.9
+#!/home/kayakayaichthys/local/ruby187/bin/ruby1.8.7
 
 load 'start.rb'
 

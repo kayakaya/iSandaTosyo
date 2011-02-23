@@ -1,4 +1,4 @@
-require 'start.rb'
+require './start.rb'
 
 set :public, File.dirname(__FILE__) + '/public'
 set :views, File.dirname(__FILE__) + '/public/views'

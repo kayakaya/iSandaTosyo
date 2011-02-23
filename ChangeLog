@@ -1,3 +1,5 @@
 2011-02-23  KAYA Satoshi  <kayakaya@kayakaya.net>
 
+	* config.ru: requireのパスに'./start.rb'に変更。ruby-1.9.2対応
+
 	* README: アンドロイド向けの記述を追加
